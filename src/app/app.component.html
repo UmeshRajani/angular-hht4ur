@@ -1,0 +1,46 @@
+<hello name="{{ name }}"></hello>
+<p>
+  Start editing to see some magic happen :)
+</p>
+  <div>
+        <!--Here for binding need to find appropriate way -->
+        <div style="display:grid;">
+            <div style="display:flex;">
+                    
+                    <input placeholder="Address Field" #addressField/>
+                    <button mat-button aria-label="add" mat-button-icon (click)="addNewControl(addressField.value)">
+                            <mat-icon>add</mat-icon>
+                    </button>
+            </div>
+            <div>
+                    <form [formGroup]="formGroup">
+                            <ng-container formArrayName="person">
+                                    <input *ngFor="let control of formGroup.controls.person.controls"
+                                      [formControl]="control.controls.name" />
+                            </ng-container>
+                    </form>
+            </div>
+        </div>
+
+                <!--Here for binding can be done based on config list -->
+                <div style="display:flex;">
+                        <div style="display:flex;">
+                                
+                                <input placeholder="Address Field" #addressField2/>
+                                <button mat-button aria-label="add" mat-button-icon (click)="addConfigControl(addressField2.value)">
+                                        <mat-icon>add</mat-icon>
+                                </button>
+                        </div>
+                        <div>
+                                <form [formGroup]="formGroup">
+                                        <ng-container formArrayName="person">
+                                            <div *ngFor="let addressConfig of addressConfigList">
+                                                    <input [formControlName]="addressConfig.name" [placeholder]="addressConfig.label" [type]="addressConfig.inputType" [(ngModel)]="addressConfig.value" />
+                                            </div>    
+                                        </ng-container>
+                                </form>
+                        </div>
+                    </div>
+
+                    
+      </div>
